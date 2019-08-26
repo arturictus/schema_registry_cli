@@ -1,8 +1,8 @@
 # SchemaRegistryCli
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/schema_registry_cli`. To experiment with that code, run `bin/console` for an interactive prompt.
+Ruby Client for Confluent Schema registry (https://github.com/confluentinc/schema-registry)[https://github.com/confluentinc/schema-registry]
 
-TODO: Delete this and the text above, and describe your gem
+This gem is builded with (wrappi)[https://github.com/arturictus/wrappi] you can check more documentation of how to use it there.
 
 ## Installation
 
@@ -20,20 +20,91 @@ Or install it yourself as:
 
     $ gem install schema_registry_cli
 
+## Config
+
+Setup is a `Wrappi::Client` check more documentation at:
+
+- (table of configs)[https://github.com/arturictus/wrappi#client]
+- (extended docs)[https://github.com/arturictus/wrappi#client-1]
+
+```ruby
+SchemaRegistryCli.setup do |config|
+  config.domain = "http://my-registry.com:8081"
+end
+```
+
 ## Usage
 
-TODO: Write usage instructions here
+### Helpers
+
+```ruby
+req = SchemaRegistryCli.register('kafka-key', 'string')
+req.body # => {"id":1}
+```
+
+Every helper returns an instance of `Wrappi::Endpoint` check documentation at: (wrappi usage)[https://github.com/arturictus/wrappi#usage]
+
+___methods:___
+
+- register(subject, schema)
+- subjects
+- subject_versions(subject)
+- fetch_schema(id)
+- fetch_version(subject, version)
+- latest_version(subject)
+- delete_version(subject, version)
+- delete_subject(subject)
+- check_registered(subject, schema)
+- test_compatibility(subject, schema)
+- sr_config
+- update_config(value)
+- update_subject_compatibility(value)
+
+### Internal Classes
+
+You can use the internal classes. They are `Wrappi::Endpoint`s. (wrappi)[https://github.com/arturictus/wrappi#usage]
+Declarations and ruby docs (here)[lib/schema_registry_cli/endpoints.rb]
+
+```ruby
+req = SchemaRegistryCli::Register.new(subject: "kafka-key", schema: "{\"type\": \"string\"}")
+req.body #=> {"id":1}
+```
+
+classes available:
+
+- Register
+- Subjects
+- SubjectVersions
+- FetchSchema
+- FetchVersion
+- LatestVersion
+- DeleteVersion
+- DeleteSubject
+- CheckRegistered
+- TestCompatibility
+- SRConfig
+- UpdateConfig
+- UpdateSubjectCompatibility] 
+
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+run schema registry locally:
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```
+bin/run_registry
+```
+
+run tests:
+
+```
+bundle exec rspec
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/schema_registry_cli. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/arturictus/schema_registry_cli. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## Code of Conduct
 
-Everyone interacting in the SchemaRegistryCli project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/schema_registry_cli/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the SchemaRegistryCli project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/arturictus/schema_registry_cli/blob/master/CODE_OF_CONDUCT.md).

@@ -123,6 +123,4 @@ module SchemaRegistryCli
     path 'config/:subject'
     verb :put
   end
-  
-
 end
