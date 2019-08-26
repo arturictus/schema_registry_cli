@@ -1,0 +1,1 @@
+Y exec rake schema_registry_cli:delete_all_schemas

@@ -4,6 +4,10 @@ Ruby Client for Confluent Schema registry (https://github.com/confluentinc/schem
 
 This gem is builded with (wrappi)[https://github.com/arturictus/wrappi] you can check more documentation of how to use it there.
 
+## TODO
+
+- [ ] Add cache
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -84,8 +88,17 @@ classes available:
 - TestCompatibility
 - SRConfig
 - UpdateConfig
-- UpdateSubjectCompatibility] 
+- UpdateSubjectCompatibility
 
+
+### Rake
+
+```
+rake -T
+
+rake schema_registry_cli:delete_all_schemas  # [DESTRUCTIVE] this will delete all schemas
+rake schema_registry_cli:show_latest         # show last version of all registered schemas
+```
 
 ## Development
 

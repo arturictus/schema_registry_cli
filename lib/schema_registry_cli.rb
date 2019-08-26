@@ -23,55 +23,55 @@ module SchemaRegistryCli
   end
 
   def self.register(subject, schema)
-    Register.new(schema: schema.to_json, subject: subject).body
+    Register.new(schema: schema.to_json, subject: subject)
   end
 
   def self.subjects
-    Subjects.new.body
+    Subjects.new
   end
 
   def self.subject_versions(subject)
-    SubjectVersions.new(subject: subject).body
+    SubjectVersions.new(subject: subject)
   end
 
   def self.fetch_schema(id)
-    FetchSchema.new(id: id).body
+    FetchSchema.new(id: id)
   end
 
   def self.fetch_version(subject, version)
-    FetchVersion.new(subject: subject, version: version).body
+    FetchVersion.new(subject: subject, version: version)
   end
 
   def self.latest_version(subject)
-    LatestVersion.new(subject: subject).body
+    LatestVersion.new(subject: subject)
   end
 
   def self.delete_version(subject, version)
-    DeleteVersion.new(subject: subject, version: version).body
+    DeleteVersion.new(subject: subject, version: version)
   end
 
   def self.delete_subject(subject)
-    DeleteSubject.new(subject: subject).body
+    DeleteSubject.new(subject: subject)
   end
 
   def self.check_registered(subject, body)
-    CheckRegistered.new(schema: body.to_json, subject: subject).body
+    CheckRegistered.new(schema: body.to_json, subject: subject)
   end
 
   def self.test_compatibility(subject, schema)
-    TestCompatibility.new(subject: subject, schema: schema.to_json).body
+    TestCompatibility.new(subject: subject, schema: schema.to_json)
   end
 
   def self.sr_config
-    SRConfig.new.body
+    SRConfig.new
   end
 
   def self.update_config(value)
-    UpdateConfig.new(compatibility: value).body
+    UpdateConfig.new(compatibility: value)
   end
 
   def self.update_subject_compatibility(value)
-    UpdateSubjectCompatibility.new(subject: subject, compatibility: value).body
+    UpdateSubjectCompatibility.new(subject: subject, compatibility: value)
   end
 end
 
