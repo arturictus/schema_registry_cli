@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    schema_registry_cli (0.1.0)
+    schema_registry_cli (0.2.0)
       wrappi (~> 0.2.6)
 
 GEM

@@ -23,55 +23,61 @@ module SchemaRegistryCli
   end
 
   def self.register(subject, schema)
-    Register.new(schema: schema.to_json, subject: subject)
+    Register.call!(schema: schema.to_json, subject: subject).body
   end
 
   def self.subjects
-    Subjects.new
+    Subjects.call!.body
   end
 
   def self.subject_versions(subject)
-    SubjectVersions.new(subject: subject)
+    SubjectVersions.call!(subject: subject).body
   end
 
   def self.fetch_schema(id)
-    FetchSchema.new(id: id)
+    FetchSchema.call!(id: id).body
+  end
+  def self.fetch(id)
+    fetch_schema(id)
   end
 
-  def self.fetch_version(subject, version)
-    FetchVersion.new(subject: subject, version: version)
+  def self.fetch_version(subject, version = "latest")
+    FetchVersion.call!(subject: subject, version: version).body
+  end
+  def self.subject_version(*args)
+    fetch_version(*args)
   end
 
   def self.latest_version(subject)
-    LatestVersion.new(subject: subject)
+    LatestVersion.call!(subject: subject).body
   end
 
   def self.delete_version(subject, version)
-    DeleteVersion.new(subject: subject, version: version)
+    DeleteVersion.call!(subject: subject, version: version).body
   end
 
   def self.delete_subject(subject)
-    DeleteSubject.new(subject: subject)
+    DeleteSubject.call!(subject: subject).body
   end
 
   def self.check_registered(subject, body)
-    CheckRegistered.new(schema: body.to_json, subject: subject)
+    CheckRegistered.call!(schema: body.to_json, subject: subject).body
   end
 
   def self.test_compatibility(subject, schema)
-    TestCompatibility.new(subject: subject, schema: schema.to_json)
+    TestCompatibility.call!(subject: subject, schema: schema.to_json).body
   end
 
   def self.sr_config
-    SRConfig.new
+    SRConfig.call!.body
   end
 
   def self.update_config(value)
-    UpdateConfig.new(compatibility: value)
+    UpdateConfig.call!(compatibility: value).body
   end
 
   def self.update_subject_compatibility(value)
-    UpdateSubjectCompatibility.new(subject: subject, compatibility: value)
+    UpdateSubjectCompatibility.call!(subject: subject, compatibility: value).body
   end
 end
 
