@@ -42,11 +42,9 @@ end
 ### Helpers
 
 ```ruby
-req = SchemaRegistryCli.register('kafka-key', 'string')
-req.body # => {"id":1}
+SchemaRegistryCli.register('kafka-key', 'string')# => {"id":1}
+SchemaRegistryCli.lastest_version('not-registered') # => ERROR
 ```
-
-Every helper returns an instance of `Wrappi::Endpoint` check documentation at: (wrappi usage)[https://github.com/arturictus/wrappi#usage]
 
 ___methods:___
 
